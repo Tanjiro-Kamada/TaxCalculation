@@ -1,7 +1,38 @@
- // number 15
-function calculateGrossSalary(basicSalary, benefits) {
-    return basicSalary + benefits;
-}
+document.getElementById('tax_form').addEventListener('submit',function(event){
+         event.preventDefault();
+
+   
+        let basicSalary = Number(document.getElementById("basic").value);
+        let benefits = Number(document.getElementById("benefits").value);
+
+        function calculateGrossSalary(basic, benefits) {
+        return basic + benefits;
+        }
+
+        let grossSalary = calculateGrossSalary(basicSalary, benefits);
+        document.getElementById('gross').innerHTML = grossSalary
+
+        let nhif = calculateNHIF(grossSalary);
+        document.getElementById('nhif').innerHTML = nhif;
+
+        let nssf = calculateNSSF(grossSalary);
+        document.getElementById('nssf').innerHTML = nssf;
+
+        let nhdf = calculateNHDF(grossSalary);
+        document.getElementById('nhdf').innerHTML = nhdf;
+
+        let taxableIncome = calculateTaxableIncome(grossSalary, nssf, nhdf, nhif);
+        document.getElementById('taxable income').innerHTML = taxableIncome;
+
+        let payee = calculatePAYEE(taxableIncome);
+        document.getElementById('payee').innerHTML = payee;
+
+        let netSalary = calculateNetSalary(grossSalary, nhdf, nhif, nssf, payee);
+        document.getElementById('net salary').innerHTML = netSalary;
+
+})
+
+
 
 function calculateNHIF(grossSalary) {
     if (grossSalary < 6000) return 150;
@@ -69,25 +100,3 @@ function calculatePAYEE(taxableIncome) {
 function calculateNetSalary(grossSalary, nhdf, nhif, nssf, payee) {
     return grossSalary - (nhdf + nhif + nssf + payee);
 }
-
-// user input
-let basicSalary = Number(prompt("Enter basic salary:"));
-let benefits = Number(prompt("Enter benefits:"));
-
-// Calling functions
-let grossSalary = calculateGrossSalary(basicSalary, benefits);
-let nhif = calculateNHIF(grossSalary);
-let nssf = calculateNSSF(grossSalary);
-let nhdf = calculateNHDF(grossSalary);
-let taxableIncome = calculateTaxableIncome(grossSalary, nssf, nhdf, nhif);
-let payee = calculatePAYEE(taxableIncome);
-let netSalary = calculateNetSalary(grossSalary, nhdf, nhif, nssf, payee);
-
-// Displaying the results
-console.log("Gross Salary: KSh " + grossSalary);
-console.log("NHIF Deduction: KSh " + nhif);
-console.log("NSSF Deduction: KSh " + nssf);
-console.log("NHDF Deduction: KSh " + nhdf);
-console.log("Taxable Income: KSh " + taxableIncome);
-console.log("PAYEE: KSh " + payee);
-console.log("Net Salary: KSh " + netSalary);
