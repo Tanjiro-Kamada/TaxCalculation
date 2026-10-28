@@ -93,7 +93,11 @@ function calculatePAYEE(taxableIncome) {
         payee += (taxableIncome - 800000) * 0.35;
     }
 
-    return Math.max(0, payee - 2400);
+     if (payee < 2400) {
+        return 0;
+    } else {
+        return payee - 2400;
+    }
 }
 
 // number 20
