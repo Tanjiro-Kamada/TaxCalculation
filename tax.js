@@ -22,13 +22,13 @@ document.getElementById('tax_form').addEventListener('submit',function(event){
         document.getElementById('nhdf').innerHTML = nhdf;
 
         let taxableIncome = calculateTaxableIncome(grossSalary, nssf, nhdf, nhif);
-        document.getElementById('taxable income').innerHTML = taxableIncome;
+        document.getElementById('taxableincome').innerHTML = taxableIncome;
 
         let payee = calculatePAYEE(taxableIncome);
         document.getElementById('payee').innerHTML = payee;
 
         let netSalary = calculateNetSalary(grossSalary, nhdf, nhif, nssf, payee);
-        document.getElementById('net salary').innerHTML = netSalary;
+        document.getElementById('netsalary').innerHTML = netSalary;
 
 })
 
